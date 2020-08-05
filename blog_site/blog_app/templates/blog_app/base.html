@@ -28,40 +28,43 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   </head>
   <body class="loader">
     <!-- NAVBAR -->
-    <nav class="navbar navbar-default techfont custom-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light techfont custom-navbar">
         <div class="container">
-            <ul class="nav navbar-nav">
-                <li><a class="navbar-brand bigbrand" href="{% url 'post_list' %}">My blog</a></li>
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="https://www.github.com">Github</a></li>
-                <li><a href="https://www.linkedin.com">Linkedin</a></li>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="navbar-brand bigbrand" href="{% url 'post_list' %}">My blog</a></li>
+                <li class="nav-item"><a href="{% url 'about' %}">About</a></li>
+                <li class="nav-item"><a href="https://www.github.com">Github</a></li>
+                <li class="nav-item"><a href="https://www.linkedin.com">Linkedin</a></li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                {% if user.is_aunthenticated %}
-                    <li>
+            <ul class="navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
                         <a href="{% url 'post_new' %}">New Post</a>
 
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a href="{% url 'post_draft_list' %}">Drafts</a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a href="{% url 'logout' %}">Log Out</a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a>Welcome {{ user.username }}</a>
                     </li>
                     {% else %}
-                        <li>
-                            <a class="nav navbar-right" href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span></a>
+                        <li class="nav-item">
+                            <a class="nav navbar-right" href="{% url 'login' %}"><span class="fa fa-user"></span></a>
                         </li>
                 {% endif %}
             </ul>
+            </div>
         </div>
     </nav>
 
@@ -70,7 +73,7 @@
         <div class="row">
             <div class="col-mid-8">
                 <div class="blog_posts">
-                    {% block_content %}
+                    {% block content %}
                     {% endblock %}
                 </div>
             </div>

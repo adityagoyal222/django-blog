@@ -13,7 +13,7 @@ from django.views.generic import (TemplateView, ListView,
 
 # Internal imports
 from blog_app.models import Post, Comment
-from blog.forms import PostForm, CommentForm
+from blog_app.forms import PostForm, CommentForm
 
 # Views for Posts and Drafts
 class AboutView(TemplateView):
@@ -24,7 +24,7 @@ class PostListView(ListView):
     model = Post
 
     def get_queryset(self):
-        return Post.object.filter(published_date__lte = timezone.now()).order_by('-published_date')
+        return Post.objects.filter(published_date__lte = timezone.now()).order_by('-published_date')
 
 
 class PostDetailView(DetailView):
@@ -65,7 +65,7 @@ class DraftListView(LoginRequiredMixin, ListView):
 @login_required
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    post.publish
+    post.publish()
     return redirect('post_detail', pk=pk)
 
 # Views for Comments
